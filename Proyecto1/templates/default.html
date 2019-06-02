@@ -7,8 +7,7 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <script src="/static/js/libs/bootstrap.min.js" ></script>
+
 </head>
 <body>
     <!--Aqui Menu-->
@@ -21,23 +20,23 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="{{url_for('index')}}">Inicio <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/static/index.html">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url_for('catalogo')}}">Productos</a>
+                  <a class="nav-link" href="/static/catalogo.html">Productos</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Contactanos</a>
+                  <a class="nav-link" href="/static/contactanos.html">Contactanos</a>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="{{url_for('ubicanos')}}">Ubicanos</a>
+                   <a class="nav-link" href="/static/ubicanos.html">Ubicanos</a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Cliente
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" hre1f="#">Carrito</a>
+                    <a class="dropdown-item" href="#">Carrito</a>
                     <a class="dropdown-item" href="#">Ofertas</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Cuenta</a>
@@ -45,7 +44,7 @@
                 </li>
               </ul>
               <form class="form-inline my-2 my-lg-0">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+                 <div><a href="/static/login.html">Login</a></div>
               </form>
             </div>
           </nav>
