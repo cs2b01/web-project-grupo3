@@ -15,6 +15,7 @@ def static_content(content):
 
 
 @app.route('/')
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -27,6 +28,11 @@ def login():
 @app.route('/ubicanos')
 def ubicanos():
     return render_template('ubicanos.html')
+
+
+@app.route('/contactanos')
+def contactanos():
+    return render_template('contactanos.html')
 
 
 @app.route('/catalogo')
