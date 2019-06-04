@@ -12,7 +12,7 @@
 <body>
     <!--Aqui Menu-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="{{url_for('index')}}">Computer Store</a>
+            <img height="60" class="d-block w-35" src="{{url_for('static',filename='images/logo.png')}}" alt="First slide">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -20,28 +20,21 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="{{url_for('index')}}">Inicio <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="{{url_for('index')}}" >Inicio<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url_for('catalogo')}}">Productos</a>
+                  <a class="nav-link" href="{{url_for('catalogo')}}" >Productos</a>
+                </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('register')}}" >Registrate</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{{url_for('contactanos')}}">Contactanos</a>
+                  <a class="nav-link" href="{{url_for('contactanos')}}" >Contactanos</a>
                 </li>
                 <li class="nav-item">
-                   <a class="nav-link" href="{{url_for('ubicanos')}}">Ubicanos</a>
+                   <a class="nav-link" href="{{url_for('ubicanos')}}" >Ubicanos</a>
                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Cliente
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Carrito</a>
-                    <a class="dropdown-item" href="#">Ofertas</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Cuenta</a>
-                  </div>
-                </li>
+
               </ul>
               <form class="form-inline my-2 my-lg-0">
                  <div><a href="{{url_for('login')}}">Login</a></div>
@@ -51,5 +44,39 @@
 {% block content %}
 
 {% endblock content %}
+
 </body>
+<footer>
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 text-left">
+            <h6 class="text-muted lead">CONTACTO:</h6>
+            <h6 class="text-muted">
+            Jr. Medrano Silva No. 186 Piso 2<br>
+            Barranco-Lima-Peru.<br>
+            Teléfonos: 01 666 5555 – 01 666 4444<br>
+            </h6>
+        </div>
+
+        <div class="col-xs-12 col-md-6 text-right">
+            <h6 class="text-muted lead">ENCUENTRANOS EN LAS REDES</h6>
+            <div class="redes-footer">
+                <a href="https://www.facebook.com/"><img src="{{url_for('static',filename='images/icon/facebook.png')}}" width="30" height="30"></a>
+                <a href="https://twitter.com/"><img src="{{url_for('static',filename='images/icon/twitter.png')}}" width="30" height="30"></a>
+                <a href="https://www.youtube.com/"><img src="{{url_for('static',filename='images/icon/youtube.png')}}" width="30" height="30"></a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-12 text-right">
+            <p class="text-muted small">Computer Store @2019.<br> Todos los derechos reservados.</p>
+        </div>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+</footer>
 </html>
