@@ -1,7 +1,6 @@
 $(function(){
     var url = "http://127.0.0.1:8080/catalogo.html";
 
-
     $("#grid").dxDataGrid({
         dataSource: DevExpress.data.AspNet.createStore({
             key: "id",

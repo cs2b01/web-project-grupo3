@@ -40,6 +40,11 @@ def catalogo():
     return render_template('catalogo.html')
 
 
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+
 @app.route('/users', methods = ['GET'])
 def get_users():
     session = db.getSession(engine)
