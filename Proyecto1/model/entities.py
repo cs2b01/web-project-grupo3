@@ -15,13 +15,13 @@ class User(connector.Manager.Base):
 class Producto(connector.Manager.Base):
     __tablename__ = 'producto'
     id = Column(Integer, Sequence('producto_id_seq'), primary_key=True)
+    codigo = Column(Integer)
     nombre = Column(String(50))
-    cantidad = Column(Integer)
     marca = Column(String(50))
-    memoria =  Column(String(50))
-    almacenamiento  =  Column(String(50))
-    GPU = Column(String(50))
+    caracteristicas =  Column(String(500))
+    cantidad  =  Column(Integer)
     precio = Column(Integer)
+    imagen = Column(String(50))
 
 
 class Compras(connector.Manager.Base):

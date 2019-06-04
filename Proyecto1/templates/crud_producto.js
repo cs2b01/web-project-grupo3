@@ -34,21 +34,22 @@ $(function(){
             dataType: "number",
             allowEditing: false
         }, {
-            dataField: "nombre"
+            dataField: "codigo",
+            dataType:"number"
         }, {
-            dataField: "cantidad",
-            dataType: "number"
+            dataField: "nombre"
         },  {
             dataField: "marca"
         }, {
-            dataField: "memoria"
+            dataField: "caracteristicas"
         }, {
-            dataField: "almacenamiento"
-        }, {
-            dataField: "GPU"
+            dataField: "cantidad",
+            dataType:"number"
         },{
             dataField: "precio",
             dataType: "number"
+        },{
+            dataField: "imagen"
         }, ],
     }).dxDataGrid("instance");
 });

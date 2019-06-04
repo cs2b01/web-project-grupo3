@@ -161,13 +161,13 @@ def get_productos():
 def create_productos():
     c =  json.loads(request.form['values'])
     producto = entities.Producto(
+        codigo=c['codigo'],
         nombre=c['nombre'],
-        cantidad=c['cantidad'],
         marca=c['marca'],
-        memoria=c['memoria'],
-        almacenamiento=c['almacenamiento'],
-        GPU=c['GPU'],
-        precio=c['precio']
+        caracteristicas=c['caracteristicas'],
+        cantidad=c['cantidad'],
+        precio=c['precio'],
+        imagen=c['imagen']
     )
     session = db.getSession(engine)
     session.add(producto)
