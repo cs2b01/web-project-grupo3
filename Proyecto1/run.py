@@ -24,26 +24,17 @@ def index():
 def login():
     return render_template('login.html')
 
-
 @app.route('/ubicanos')
 def ubicanos():
     return render_template('ubicanos.html')
-
 
 @app.route('/contactanos')
 def contactanos():
     return render_template('contactanos.html')
 
-
 @app.route('/catalogo')
 def catalogo():
-    return render_template('catalogo.html')
-
-
-@app.route('/register')
-def register():
-    return render_template('register.html')
-
+    return render_template('cata    logo.html')
 
 @app.route('/users', methods = ['GET'])
 def get_users():
@@ -169,10 +160,9 @@ def create_productos():
         codigo=c['codigo'],
         nombre=c['nombre'],
         marca=c['marca'],
-        caracteristicas=c['caracteristicas'],
         cantidad=c['cantidad'],
         precio=c['precio'],
-        imagen=c['imagen']
+
     )
     session = db.getSession(engine)
     session.add(producto)
@@ -187,8 +177,8 @@ def update_producto():
     producto = session.query(entities.Producto).filter(entities.Producto.id == id).first()
     c =  json.loads(request.form['values'])
     for key in c.keys():
-        setattr(compra, key, c[key])
-    session.add(compra)
+        setattr(producto, key, c[key])
+    session.add(producto)
     session.commit()
     return 'Updated User'
 

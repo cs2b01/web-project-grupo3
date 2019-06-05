@@ -18,10 +18,8 @@ class Producto(connector.Manager.Base):
     codigo = Column(Integer)
     nombre = Column(String(50))
     marca = Column(String(50))
-    caracteristicas =  Column(String(500))
     cantidad  =  Column(Integer)
     precio = Column(Integer)
-    imagen = Column(String(50))
 
 
 class Compras(connector.Manager.Base):

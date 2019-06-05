@@ -40,16 +40,12 @@ $(function(){
             dataField: "nombre"
         },  {
             dataField: "marca"
-        }, {
-            dataField: "caracteristicas"
-        }, {
+        },  {
             dataField: "cantidad",
             dataType:"number"
         },{
             dataField: "precio",
             dataType: "number"
-        },{
-            dataField: "imagen"
         }, ],
     }).dxDataGrid("instance");
 });
