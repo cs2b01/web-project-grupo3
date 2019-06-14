@@ -31,11 +31,15 @@ function usuario(){
                 //alert(JSON.stringify(response));
                 var i = 0;
                 $.each(response, function(){
+                    if( (response[i]['usercomprador_id']) == currentUserId){
                     f = '<div class="alert alert-secondary" role="alert"  >';
                     f = f + response[i]['producto']['nombre'];
                     f = f + '</div>';
                     i = i+1;
-                    $('#allcompras').append(f);
+                    $('#allcompras').append(f);}
+                    else {
+                        i=i+1;
+                    }
                 });
             },
             error: function(response){
@@ -77,20 +81,27 @@ function usuario(){
         });
     }
 
-function comprar(user_from_id, user_to_id){
+function comprar(current, producto_id){
         //alert(user_from_id);
         //alert(user_to_id);
         currentClickedId = producto_id;
+        var data = JSON.stringify({
+                "usercomprador_id": currentUserId,
+                "producto_id": currentClickedId,
+                "satisfaccion": 8
+            });
         $.ajax({
-            url:'/compras/'+producto_id+"/"+user_from,
-            type:'PUT',
+            url:'/compra',
+            type:'POST',
             contentType: 'application/json',
+            data : data,
             dataType:'json',
-            success: function(response){
-
+           success: function(response){
+                location.href= "/static/catalogo.html"
             },
             error: function(response){
-                alert(JSON.stringify(response));
+                location.href= "/static/catalogo.html"
             }
         });
     }
+

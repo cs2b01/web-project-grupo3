@@ -154,6 +154,23 @@ def delete_compra():
     session.commit()
     return "Deleted Compras"
 
+@app.route('/compra', methods = ["POST"])
+def comprar():
+    data = json.loads(request.data)
+    usercomprador_id = data['usercomprador_id']
+    producto_id = data['producto_id']
+    satisfaccion = data['satisfaccion']
+
+    newcompra = entities.Compras(
+    usercomprador_id = usercomprador_id,
+    producto_id = producto_id,
+    satisfaccion = satisfaccion)
+
+    #2. Save in database
+    db_session = db.getSession(engine)
+    db_session.add(newcompra)
+    db_session.commit()
+
 
 @app.route('/productos', methods = ['GET'])
 def get_productos():
@@ -235,6 +252,11 @@ def current_user():
             cls=connector.AlchemyEncoder),
             mimetype='application/json'
         )
+
+@app.route('/logout', methods = ["GET"])
+def logout():
+    session.clear()
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
