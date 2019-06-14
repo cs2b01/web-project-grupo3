@@ -48,17 +48,18 @@ def get_users():
 
 @app.route('/users', methods = ['POST'])
 def create_user():
-    c =  json.loads(request.form['values'])
+    data =json.loads(request.data)
     user = entities.User(
-        username=c['username'],
-        name=c['name'],
-        fullname=c['fullname'],
-        password=c['password']
+        username=data['username'],
+        name=data['name'],
+        fullname=data['fullname'],
+        password=data['password']
     )
     session = db.getSession(engine)
     session.add(user)
     session.commit()
-    return 'Created User'
+    response = {'user': 'created'}
+    return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
 
 @app.route('/users', methods = ['PUT'])
@@ -132,6 +133,17 @@ def update_compra():
     session.commit()
     return 'Updated User'
 
+@app.route('/compras/<user_from_id>/<user_to_id>', methods = ['PUT'])
+def compra():
+    session = db.getSession(engine)
+    id = request.form['key']
+    compra = session.query(entities.Compras).filter(entities.Compras.id == id).first()
+    c =  json.loads(request.form['values'])
+    for key in c.keys():
+        setattr(compra, key, c[key])
+    session.add(compra)
+    session.commit()
+    return 'Updated User'
 
 @app.route('/compras', methods = ['DELETE'])
 def delete_compra():
@@ -175,7 +187,7 @@ def update_producto():
     session = db.getSession(engine)
     id = request.form['key']
     producto = session.query(entities.Producto).filter(entities.Producto.id == id).first()
-    c =  json.loads(request.form['values'])
+    c = json.loads(request.form['values'])
     for key in c.keys():
         setattr(producto, key, c[key])
     session.add(producto)
@@ -191,6 +203,38 @@ def delete_producto():
     session.delete(productos)
     session.commit()
     return "Deleted Compras"
+
+@app.route('/authenticate', methods = ["POST"])
+def authenticate():
+    message = json.loads(request.data)
+    username = message['username']
+    password = message['password']
+    #2. look in database
+    db_session = db.getSession(engine)
+    try:
+        user = db_session.query(entities.User
+            ).filter(entities.User.username == username
+            ).filter(entities.User.password == password
+            ).one()
+        session['logged_user'] = user.id
+        message = {'message': 'Authorized'}
+        return Response(message, status=200, mimetype='application/json')
+    except Exception:
+        message = {'message': 'Unauthorized'}
+        return Response(message, status=401, mimetype='application/json')
+
+
+@app.route('/current', methods = ["GET"])
+def current_user():
+    db_session = db.getSession(engine)
+    user = db_session.query(entities.User).filter(
+        entities.User.id == session['logged_user']
+        ).first()
+    return Response(json.dumps(
+            user,
+            cls=connector.AlchemyEncoder),
+            mimetype='application/json'
+        )
 
 
 if __name__ == '__main__':
