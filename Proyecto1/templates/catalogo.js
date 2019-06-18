@@ -1,4 +1,5 @@
 var currentUserId = 0;
+
 var currentClickedId = 0;
 
 function usuario(){
@@ -11,14 +12,17 @@ function usuario(){
                 //alert(JSON.stringify(response));
                 $('#cu_username').html(response['username'])
                 var name = response['name']+" "+response['fullname'];
-                currentUserId = response['id']
+                currentUserId = response['id'];
                 allcompras();
                 allproductos();
             },
             error: function(response){
-                alert(JSON.stringify(response));
+                alert("Ingrese primero");
+                location.href= "/static/login.html";
+
             }
         });
+
     }
 
      function allcompras(){
@@ -58,7 +62,7 @@ function usuario(){
                 var i = 0;
                 $.each(response, function(){
                     if( (response[i]['cantidad']) != 0){
-                         f = '<div class="alert alert-secondary" role="alert"  onclick=comprar('+currentUserId+','+response[i].id+') >';
+                    f = '<div class="alert alert-secondary" role="alert"  onclick=comprar('+currentUserId+','+response[i].id+') >';
                     f = f + response[i]['nombre'];
                     f = f + '<br/>'
                     f = f + 'Precio: '
@@ -103,5 +107,9 @@ function comprar(current, producto_id){
                 location.href= "/static/catalogo.html"
             }
         });
-    }
+}
 
+function pagar(){
+       alert("Gracias por su compra. \n Nos pondremos en Contacto para la entrega.");
+       location.href="/static/index.html"
+}

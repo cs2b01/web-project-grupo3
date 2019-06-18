@@ -46,9 +46,36 @@
       </div>
     </div>
   </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
         function getData(){
         message="Gracias por su envio!";
+        var nombre = $('#Nombre').val();
+        var email = $('#email').val();
+        var phone = $('#phone').val();
+        var message = $('#message').val();
+        var mensaje = JSON.stringify({
+                "Nombre": nombre,
+                "email": email,
+                "phone": phone,
+                "message":message
+            });
+          $.ajax({
+            url:'/envmensaje',
+            type:'POST',
+            contentType: 'application/json',
+            data : mensaje,
+            dataType:'json',
+            success: function(response){
+            },
+            error: function(response){
+                //alert(JSON.stringify(response));
+            }
+        });
+        document.getElementById("Nombre").value="";
+        document.getElementById("email").value="";
+        document.getElementById("phone").value="";
+        document.getElementById("message").value="";
         alert(message);
           }
   </script>

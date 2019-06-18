@@ -30,3 +30,10 @@ class Compras(connector.Manager.Base):
     usercomprador = relationship(User, foreign_keys=[usercomprador_id])
     producto = relationship(Producto, foreign_keys=[producto_id])
     satisfaccion = Column(Integer)
+class Mensaje(connector.Manager.Base):
+    __tablename__ = 'mensaje'
+    id = Column(Integer, Sequence('mensaje_id_seq'), primary_key=True)
+    nombre = Column(String(50))
+    email = Column(String(50))
+    phone = Column(Integer)
+    message = Column(String(200))

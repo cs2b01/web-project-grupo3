@@ -60,6 +60,20 @@ def create_user():
     session.commit()
     response = {'user': 'created'}
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+@app.route('/envmensaje', methods = ['POST'])
+def envmessage():
+    data =json.loads(request.data)
+    mensaje = entities.Mensaje(
+        nombre=data['Nombre'],
+        email=data['email'],
+        phone=data['phone'],
+        message=data['message']
+    )
+    session = db.getSession(engine)
+    session.add(mensaje)
+    session.commit()
+    response = {'Mensaje': 'created'}
+    return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
 
 
 @app.route('/users', methods = ['PUT'])
@@ -145,14 +159,6 @@ def compra():
     session.commit()
     return 'Updated User'
 
-@app.route('/compras', methods = ['DELETE'])
-def delete_compra():
-    id = request.form['key']
-    session = db.getSession(engine)
-    compras = session.query(entities.Compras).filter(entities.Compras.id == id).one()
-    session.delete(compras)
-    session.commit()
-    return "Deleted Compras"
 
 @app.route('/compra', methods = ["POST"])
 def comprar():
