@@ -60,6 +60,7 @@ def create_user():
     session.commit()
     response = {'user': 'created'}
     return Response(json.dumps(response, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+
 @app.route('/envmensaje', methods = ['POST'])
 def envmessage():
     data =json.loads(request.data)
@@ -228,7 +229,7 @@ def delete_producto():
     return "Deleted Compras"
 
 @app.route('/authenticate', methods = ["POST"])
-def authenticate():
+def authenticateMobile():
     message = json.loads(request.data)
     username = message['username']
     password = message['password']
@@ -240,11 +241,14 @@ def authenticate():
             ).filter(entities.User.password == password
             ).one()
         session['logged_user'] = user.id
-        message = {'message': 'Authorized'}
+        message = {'message': 'Authorized', 'user_id': user.id, 'username': user.name}
+        message = json.dumps(message, cls=connector.AlchemyEncoder)
         return Response(message, status=200, mimetype='application/json')
     except Exception:
         message = {'message': 'Unauthorized'}
+        message = json.dumps(message, cls=connector.AlchemyEncoder)
         return Response(message, status=401, mimetype='application/json')
+
 
 
 @app.route('/current', methods = ["GET"])
@@ -267,5 +271,5 @@ def logout():
 
 if __name__ == '__main__':
     app.secret_key = ".."
-    app.run(debug = True ,port=8080, threaded=True, host=('127.0.0.1'))
+    app.run(debug = True ,port=5000, threaded=True, host=('127.0.0.1'))
 
