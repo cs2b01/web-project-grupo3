@@ -179,6 +179,17 @@ def comprar():
     db_session.commit()
 
 
+@app.route('/mobile/productos', methods = ['GET'])
+def get_mobileprooducto():
+    session = db.getSession(engine)
+    dbResponse = session.query(entities.Producto)
+    data = []
+    for producto in dbResponse:
+        data.append(producto)
+    message = {'response' : data}
+    return Response(json.dumps(message, cls=connector.AlchemyEncoder), status=200, mimetype='application/json')
+
+
 @app.route('/productos', methods = ['GET'])
 def get_productos():
     session = db.getSession(engine)
@@ -186,9 +197,7 @@ def get_productos():
     data = []
     for producto in dbResponse:
         data.append(producto)
-    message = {'response' : data}
-    return Response(json.dumps(message, cls=connector.AlchemyEncoder),status=200, mimetype='application/json')
-
+    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
 
 @app.route('/productos', methods = ['POST'])
 def create_productos():
