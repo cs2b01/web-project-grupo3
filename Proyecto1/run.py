@@ -186,7 +186,8 @@ def get_productos():
     data = []
     for producto in dbResponse:
         data.append(producto)
-    return Response(json.dumps(data, cls=connector.AlchemyEncoder), mimetype='application/json')
+    message = {'response' : data}
+    return Response(json.dumps(message, cls=connector.AlchemyEncoder),status=200, mimetype='application/json')
 
 
 @app.route('/productos', methods = ['POST'])
